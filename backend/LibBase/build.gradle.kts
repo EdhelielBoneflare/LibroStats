@@ -2,10 +2,11 @@ plugins {
 	java
 	id("org.springframework.boot") version "4.0.2"
 	id("io.spring.dependency-management") version "1.1.7"
+	`maven-publish`
 }
 
 group = "me.librostats"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 description = "LibBase"
 
 java {
@@ -25,11 +26,26 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	compileOnly("org.projectlombok:lombok")
-	annotationProcessor("org.projectlombok:lombok")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	implementation("tools.jackson.core:jackson-core:3.0.3")
+
+	compileOnly("org.projectlombok:lombok:1.18.42")
+	annotationProcessor("org.projectlombok:lombok:1.18.42")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+publishing {
+	publications {
+		create<MavenPublication>("maven") {
+			from(components["java"])
+		}
+	}
+	repositories {
+		mavenLocal()
+	}
 }
 
 tasks.withType<Test> {
