@@ -1,6 +1,6 @@
 package me.librostats.libbase.exception.UserException;
 
-public class UserException extends Exception {
+public class UserException extends RuntimeException {
     public UserException(String message) {
         super(message);
     }

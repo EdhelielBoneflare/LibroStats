@@ -27,6 +27,8 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-autoconfigure")
 
 	implementation("tools.jackson.core:jackson-core:3.0.3")
 
@@ -35,6 +37,15 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+// Configure as library, not executable Spring Boot application
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+	enabled = false
+}
+
+tasks.named<Jar>("jar") {
+	enabled = true
 }
 
 publishing {

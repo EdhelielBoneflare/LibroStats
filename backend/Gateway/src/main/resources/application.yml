@@ -3,12 +3,16 @@ spring:
     name: Gateway
   cloud:
     gateway:
+      routes:
+        - id: UserService
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/userservice/**
+          filters:
+            - StripPrefix=1
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
-  # config:
-    # import: "optional:configserver:http://localhost:8888"
 
 server:
   port: 8080
@@ -30,3 +34,12 @@ logging:
       netty:
         http:
           client: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+  endpoint:
+    gateway:
+      enabled: true

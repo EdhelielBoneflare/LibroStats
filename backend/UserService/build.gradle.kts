@@ -22,11 +22,14 @@ configurations {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 extra["springCloudVersion"] = "2025.1.0"
 
 dependencies {
+    implementation("me.librostats:LibBase:0.0.1")
+
     implementation("me.paulschwarz:spring-dotenv:3.0.0")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
