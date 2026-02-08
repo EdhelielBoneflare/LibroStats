@@ -1,6 +1,7 @@
 package me.librostats.userservice.controller;
 
 public interface BaseContr {
+    String PATH_USER_SERVICE = "/user-service";
     String PATH_API = "/api";
     String PATH_AUTH = "/auth";
     String PATH_LOGIN = "/login";

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(BaseContr.PATH_API + BaseContr.PATH_AUTH)
+@RequestMapping(BaseContr.PATH_USER_SERVICE + BaseContr.PATH_API + BaseContr.PATH_AUTH)
 @RequiredArgsConstructor
 public class AuthContr {
 

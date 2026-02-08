@@ -3,21 +3,26 @@ spring:
     name: Gateway
   cloud:
     gateway:
-      routes:
-        - id: UserService
-          uri: lb://USERSERVICE
-          predicates:
-            - Path=/userservice/**
-          filters:
-            - StripPrefix=1
-      discovery:
-        locator:
-          enabled: true
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: UserService
+              uri: lb://USERSERVICE
+              predicates:
+                - Path=/user-service/**
+              filters:
+                - StripPrefix=1
 
 server:
   port: 8080
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
@@ -33,13 +38,13 @@ logging:
     reactor:
       netty:
         http:
-          client: DEBUG
+          client: WARN
 
 management:
   endpoints:
     web:
       exposure:
-        include: gateway
+        include: gateway, health, info
   endpoint:
-    gateway:
-      enabled: true
+    health:
+      show-details: always
