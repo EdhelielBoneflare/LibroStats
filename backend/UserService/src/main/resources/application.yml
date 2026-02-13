@@ -25,3 +25,8 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+jwt:
+  issuer: ${JWT_ISSUER:filmstats}
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:3600000}
